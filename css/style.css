@@ -242,6 +242,11 @@ body {
   cursor: pointer;
 }
 
+.form-container .checkout-button.disabled {
+  background-color: #999999;
+  cursor: not-allowed;
+}
+
 /* Hero Section */
 
 .hero {

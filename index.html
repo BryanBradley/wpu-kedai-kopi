@@ -20,8 +20,10 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <!-- App -->
-    <script src="src/app.js"></script>
+    <script src="src/app.js" async></script>
 
+    <!-- Midtrans -->
+    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-XXXXXXXXXXXXXXXX"></script>
   </head>
   <body>
 
@@ -75,6 +77,8 @@
 
         <div x-show="$store.cart.items.length" class="form-container">
           <form action="" id="checkoutForm">
+            <input type="hidden" name="items" x-model="JSON.stringify($store.cart.items)">
+            <input type="hidden" name="total" x-model="$store.cart.total">
             <h5>Customer Detail</h5>
             <label for="name">
               <span>Name :</span>
@@ -91,7 +95,7 @@
               <input type="phone" name="phone" id="phone" autocomplete="off">
             </label>
 
-            <button class="checkout-button" type="submit" id="checkout-button">Checkout</button>
+            <button class="checkout-button disabled" type="submit" id="checkout-button">Checkout</button>
           </form>
         </div>
       </div>
