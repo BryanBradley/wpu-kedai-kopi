@@ -22,15 +22,14 @@
     <!-- App -->
     <script src="src/app.js" async></script>
 
-    <!-- Midtrans -->
-    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-XXXXXXXXXXXXXXXX"></script>
+    <!-- Midtrans - Load only when needed -->
+    <!-- <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-XXXXXXXXXXXXXXXX"></script> -->
   </head>
   <body>
 
     <!-- Navbar Start -->
     <nav class="navbar" x-data>
       <a href="#" class="navbar-logo">kenangan<span>senja</span>.</a>
-
       <div class="navbar-nav">
         <a href="#home">Home</a>
         <a href="#about">Tentang Kami</a>
@@ -38,14 +37,13 @@
         <a href="#products">Produk</a>
         <a href="#contact">Kontak</a>
       </div>
-
       <div class="navbar-extra">
         <a href="#" id="search-button"> <i data-feather="search"></i></a>
         <a href="#" id="shopping-cart-button">
           <i data-feather="shopping-cart"></i>
           <span class="quantity-badge" x-show="$store.cart.quantity" x-text="$store.cart.quantity"></span>
         </a>
-        <a href="#" id="hamburger-menu"> <i data-feather="menu"></i></a>
+        <button type="button" id="hamburger-menu"> <i data-feather="menu"></i></button>
       </div>
 
       <!-- Seach Form Start -->
@@ -73,8 +71,10 @@
           </div>
         </template>
         <h4 x-show="!$store.cart.items.length" style="margin-top: 1rem;">Cart is Empty</h4>
-        <h4 x-show="$store.cart.items.length">Total : <span x-text="rupiah($store.cart.total)"></span></h4>
-
+        <div x-show="$store.cart.items.length">
+          <h4>Total : <span x-text="rupiah($store.cart.total)"></span></h4>
+          <button @click="$store.cart.clear()" class="clear-button">Clear All</button>
+        </div>
         <div x-show="$store.cart.items.length" class="form-container">
           <form action="" id="checkoutForm">
             <input type="hidden" name="items" x-model="JSON.stringify($store.cart.items)">
@@ -84,17 +84,14 @@
               <span>Name :</span>
               <input type="text" name="name" id="name">
             </label>
-
             <label for="email">
               <span>Email :</span>
               <input type="email" name="email" id="email">
             </label>
-
             <label for="phone">
               <span>Phone :</span>
               <input type="phone" name="phone" id="phone" autocomplete="off">
             </label>
-
             <button class="checkout-button disabled" type="submit" id="checkout-button">Checkout</button>
           </form>
         </div>
@@ -108,7 +105,7 @@
       <div class="mask-container">
         <main class="content">
           <h1>Mari Nikmati Secangkir <span>Kopi</span></h1>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iure, culpa!</p>
+          <p>Rasakan kehangatan kopi terbaik dari biji pilihan yang diseduh dengan penuh cinta di setiap cangkir.</p>
         </main>
       </div>
     </section>
@@ -123,8 +120,8 @@
         </div>
         <div class="content">
           <h3>Kenapa memilih kopi kami?</h3>
-          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta qui modi consectetur, provident placeat blanditiis?</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias dolorem velit eaque ratione vel vero ipsa sunt eos soluta sed?</p>
+          <p>Kami hanya menggunakan biji kopi premium yang dipetik langsung dari perkebunan terbaik di Indonesia, diproses dengan teknologi modern namun tetap mempertahankan cita rasa tradisional.</p>
+          <p>Setiap cangkir kopi yang kami sajikan adalah hasil dari proses seleksi ketat dan teknik brewing yang sempurna, memberikan pengalaman minum kopi yang tak terlupakan bagi setiap pelanggan kami.</p>
         </div>
       </div>
     </section>
@@ -133,37 +130,32 @@
     <!-- Menu Section Start -->
     <section class="menu" id="menu">
       <h2><span>Menu</span> Kami</h2>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero quos repudiandae nobis nam provident labore.</p>
-
+      <p>Pilihan kopi spesial dengan cita rasa yang sempurna.</p>
       <div class="row">
         <div class="menu-card">
-          <img src="img/menu/1.jpg" alt="Espresso" class="menu-card-title">
+          <img src="img/menu/1.jpg" alt="Espresso" class="menu-card-title" loading="lazy">
           <h3 class="menu-card-title">- Espresso -</h3>
           <p class="menu-card-price">IDR 15k</p>
         </div>
-
         <div class="menu-card">
-          <img src="img/menu/1.jpg" alt="Espresso" class="menu-card-title">
-          <h3 class="menu-card-title">- Espresso -</h3>
-          <p class="menu-card-price">IDR 15k</p>
+          <img src="img/menu/2.jpg" alt="Americano" class="menu-card-title" loading="lazy">
+          <h3 class="menu-card-title">- Americano -</h3>
+          <p class="menu-card-price">IDR 18k</p>
         </div>
-
         <div class="menu-card">
-          <img src="img/menu/1.jpg" alt="Espresso" class="menu-card-title">
-          <h3 class="menu-card-title">- Espresso -</h3>
-          <p class="menu-card-price">IDR 15k</p>
+          <img src="img/menu/3.jpg" alt="Cappuccino" class="menu-card-title" loading="lazy">
+          <h3 class="menu-card-title">- Cappuccino -</h3>
+          <p class="menu-card-price">IDR 22k</p>
         </div>
-
         <div class="menu-card">
-          <img src="img/menu/1.jpg" alt="Espresso" class="menu-card-title">
-          <h3 class="menu-card-title">- Espresso -</h3>
-          <p class="menu-card-price">IDR 15k</p>
+          <img src="img/menu/4.jpg" alt="Latte" class="menu-card-title" loading="lazy">
+          <h3 class="menu-card-title">- Latte -</h3>
+          <p class="menu-card-price">IDR 25k</p>
         </div>
-
         <div class="menu-card">
-          <img src="img/menu/1.jpg" alt="Espresso" class="menu-card-title">
-          <h3 class="menu-card-title">- Espresso -</h3>
-          <p class="menu-card-price">IDR 15k</p>
+          <img src="img/menu/5.jpg" alt="Mocha" class="menu-card-title" loading="lazy">
+          <h3 class="menu-card-title">- Mocha -</h3>
+          <p class="menu-card-price">IDR 28k</p>
         </div>
       </div>
     </section>
@@ -172,8 +164,7 @@
     <!-- Product Section Start -->
     <section class="products" id="products" x-data="products">
       <h2><span>Produk Unggulan</span> Kami</h2>
-      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis aperiam, eaque illo laboriosam beatae sunt?</p>
-
+      <p>Koleksi biji kopi premium dari berbagai daerah di Indonesia.</p>
       <div class="row">
         <template x-for="(item, index) in items" x-key="index">
           <div class="product-card">
@@ -183,14 +174,14 @@
                   <use href="img/feather-sprite.svg#shopping-cart" />
                 </svg>
               </a>
-              <a href="#" class="item-detail-button">
+              <a href="#" class="item-detail-button" @click.prevent="showProductDetail(item)">
                 <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <use href="img/feather-sprite.svg#eye" />
                 </svg>
               </a>
             </div>
             <div class="product-image">
-              <img :src="`img/products/${item.img}`" :alt="item.name">
+              <img :src="`img/products/${item.img}`" :alt="item.name" loading="lazy">
             </div>
             <div class="product-content">
               <h3 x-text="item.name"></h3>
@@ -222,11 +213,9 @@
     <!-- Contact Section Start -->
     <section class="contact" id="contact">
       <h2><span>Kontak</span> Kami</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo, placeat.</p>
-
+      <p>Hubungi kami atau kunjungi kedai kopi kami.</p>
       <div class="row">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d254333.05220373272!2d119.23781084190703!3d-5.111126461408144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dbee329d96c4671%3A0x3030bfbcaf770b0!2sMakassar%2C%20Kota%20Makassar%2C%20Sulawesi%20Selatan!5e0!3m2!1sid!2sid!4v1750159862608!5m2!1sid!2sid" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="map"></iframe>
-
         <form action="">
           <div class="input-group">
             <i data-feather="user"></i>
@@ -246,7 +235,6 @@
     </section>
     <!-- Contact Section End -->
 
-
     <!-- Footer Start -->
     <footer>
       <div class="socials">
@@ -254,14 +242,13 @@
         <a href="#"><i data-feather="twitter"></i></a>
         <a href="#"><i data-feather="facebook"></i></a>
       </div>
-
       <div class="links">
         <a href="#home">Home</a>
         <a href="#about">Tentang Kami</a>
         <a href="#menu">Menu</a>
+        <a href="#products">Produk</a>
         <a href="#contact">Kontak</a>
       </div>
-
       <div class="credit">
         <p>Created by <a href="#">bryanbradley.</a> | &copy 2025.</p>
       </div>
@@ -276,16 +263,26 @@
           <img src="img/products/1.jpg" alt="Product 1">
           <div class="product-content">
             <h3>Product 1</h3>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea vel maiores error quisquam sequi expedita placeat, iste perspiciatis aperiam laudantium nostrum tempore cumque quasi dolores.</p>
+            <p>Biji kopi premium dengan cita rasa yang kaya dan aroma yang menggugah selera.</p>
             <div class="product-stars">
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
+              <svg width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <use href="img/feather-sprite.svg#star" />
+              </svg>
+              <svg width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <use href="img/feather-sprite.svg#star" />
+              </svg>
+              <svg width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <use href="img/feather-sprite.svg#star" />
+              </svg>
+              <svg width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <use href="img/feather-sprite.svg#star" />
+              </svg>
+              <svg width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <use href="img/feather-sprite.svg#star" />
+              </svg>
             </div>
             <div class="product-price">IDR 30K <span>IDR 55K</span></div>
-            <a href="#"><i data-feather="shopping-cart"></i><span>add to cart</span></a>
+            <a href="#" onclick="addToCartFromModal(event)"><i data-feather="shopping-cart"></i><span>add to cart</span></a>
           </div>
         </div>
       </div>
